@@ -21,13 +21,20 @@ import org.apache.http.impl.client.HttpClientBuilder;
 public class SimpleHttpClientCreator implements HttpClientCreator {
 
     /**
+     * The sole instance.
+     */
+    private static HttpClient client = null;
+
+    /**
      * The simplest implementation of creating an instance of Http client.
      *
      * @return
      */
     public HttpClient createHttpClient() {
-        HttpClientBuilder builder = HttpClientBuilder.create();
-        HttpClient client =  builder.build();
+        if (client == null) {
+            HttpClientBuilder builder = HttpClientBuilder.create();
+            client = builder.build();
+        }
 
         return client;
     }
