@@ -23,18 +23,18 @@ public class SurveyResponse implements Resp {
      * The survey ID.
      */
     @SerializedName(LSurveyConstants.SERIALIZED_RESULT)
-    protected long surveyId;
+    protected int surveyId;
 
     /**
      * Empty constructor of {@link SurveyResponse}.
      */
     public SurveyResponse() {}
 
-    public long getSurveyId() {
+    public int getSurveyId() {
         return surveyId;
     }
 
-    public void setSurveyId(final long surveyId) {
+    public void setSurveyId(final int surveyId) {
         this.surveyId = surveyId;
     }
 

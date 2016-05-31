@@ -59,4 +59,13 @@ public interface ConnectorService {
      * @return an object.
      */
     ListSurveysResponse listSurveys(final LSurveyRequestCreator requestCreator);
+
+    /**
+     * Execute the request being created by the given request creator.
+     * Returns true if and only if the survey specified is being activated, otherwise false.
+     *
+     * @param requestCreator the request creator.
+     * @return true if and only if the specific survey is activated, otherwise false.
+     */
+    boolean activateSurvey(final LSurveyRequestCreator requestCreator);
 }

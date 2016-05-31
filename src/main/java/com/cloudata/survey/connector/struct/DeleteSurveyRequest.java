@@ -9,17 +9,16 @@
 
 package com.cloudata.survey.connector.struct;
 
-import com.cloudata.survey.connector.LSurveyConstants;
-
 /**
+ * A request is being sent to delete the survey identified by {@link DeleteSurveyRequest#surveyInSession}.
  *
  * Author: DORSEy
  */
-public class DeleteSurveyRequest extends ConnRequest {
+public class DeleteSurveyRequest implements ReqParams {
     /**
-     * The id of survey to be removed.
+     * The survey in session, with session key and survey ID specified.
      */
-    private long surveyId;
+    private SurveyInSession surveyInSession;
 
     /**
      * Empty constructor of {@link DeleteSurveyRequest}.
@@ -31,17 +30,16 @@ public class DeleteSurveyRequest extends ConnRequest {
      * @param sessionKey the session key.
      * @param surveyId the survey id.
      */
-    public DeleteSurveyRequest(final String sessionKey, final long surveyId) {
-        super(sessionKey);
-        this.surveyId = surveyId;
+    public DeleteSurveyRequest(final String sessionKey, final int surveyId) {
+        setSurveyInSession(new SurveyInSession(sessionKey, surveyId));
     }
 
-    public long getSurveyId() {
-        return surveyId;
+    public void setSurveyInSession(final SurveyInSession surveyInSession) {
+        this.surveyInSession = surveyInSession;
     }
 
-    public void setSurveyId(long surveyId) {
-        this.surveyId = surveyId;
+    public SurveyInSession getSurveyInSession() {
+        return surveyInSession;
     }
 
     /**
@@ -53,7 +51,6 @@ public class DeleteSurveyRequest extends ConnRequest {
      * @return
      */
     public String toString() {
-        return "\"" + LSurveyConstants.SERIALIZED_SESSION_KEY + "\": \"" + sessionKey + "\", "
-                + "\"" + LSurveyConstants.SERIALIZED_WISHED_SURVEY_ID + "\": " + surveyId;
+        return (this.surveyInSession == null ? null : this.surveyInSession.toString());
     }
 }

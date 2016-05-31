@@ -47,7 +47,6 @@ public class AddSurveyRequest extends ConnRequest {
      *
      * @param sessionKey the session key.
      * @param surveyTitle the survey title.
-     * @param wishedSurveyId the wished survey id.
      * @param surveyLanguage the survey language, it can't be modified once its determined.
      * @param surveyFormat the format.
      */

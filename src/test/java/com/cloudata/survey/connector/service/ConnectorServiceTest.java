@@ -19,6 +19,7 @@ import org.junit.Before;
 import org.junit.Test;
 
 /**
+ * A test for {@link ConnectorService}.
  *
  * Author: DORSEy
  */
@@ -33,6 +34,7 @@ public class ConnectorServiceTest {
 
     @Before
     public void setUp() {
+        // leverage spring IoC to do instantiation.
         LimeSurveyManager manager = new LimeSurveyManager();
         manager.setUri(LS_URI);
         manager.setMethodCreator(new SimpleHttpMethodCreator());
@@ -98,7 +100,7 @@ public class ConnectorServiceTest {
     @Test
     public void testDeleteSurvey() {
         // pls correct the following two constants for testing.
-        final long SURVEY_ID = 561483;
+        final int SURVEY_ID = 561483;
         final String SESSION_KEY = "7sbp5azchew484g6wgijg8633btbtx7s";
         boolean succeed = service.deleteSurvey(new LSurveyRequestCreator() {
             public LSurveyRequest create() {
@@ -125,5 +127,21 @@ public class ConnectorServiceTest {
 
         Assert.assertNotNull(response);
         System.out.println(response.getDetails());
+    }
+
+    @Test
+    public void testActivateSurvey() {
+        // pls correct me for testing.
+        final int SURVEY_ID = 818388;
+        final String SESSION_KEY = "njvd9xqhr42aqmw9q38zctexd6hxt3rm";
+        boolean succeed = service.activateSurvey(new LSurveyRequestCreator() {
+            public LSurveyRequest create() {
+                ActivateSurveyRequest reqParams = new ActivateSurveyRequest(SESSION_KEY, SURVEY_ID);
+
+                return new LSurveyRequest(LSurveyConstants.CMD_ACTIVATE_SURVEY, reqParams);
+            }
+        });
+
+        Assert.assertTrue(succeed);
     }
 }

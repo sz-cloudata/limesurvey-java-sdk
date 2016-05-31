@@ -53,6 +53,17 @@ public class ConnectorSerivceImpl implements ConnectorService {
         return manager.execute(requestCreator, ListSurveysResponse.class);
     }
 
+    public boolean activateSurvey(LSurveyRequestCreator requestCreator) {
+        ActivateSurveyResponse response = manager.execute(requestCreator, ActivateSurveyResponse.class);
+        boolean succeed = false;
+        RespStatus respStatus = null;
+        if (response != null && (respStatus = response.getRespStatus()) != null) {
+            succeed = (LSurveyConstants.LS_OK.equalsIgnoreCase(respStatus.getStatus())) ? true : false;
+        }
+
+        return succeed;
+    }
+
     public void setManager(LimeSurveyManager manager) {
         this.manager = manager;
     }

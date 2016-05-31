@@ -41,6 +41,11 @@ public interface LSurveyConstants {
      */
     String CMD_LIST_SURVEYS = "list_surveys";
 
+    /**
+     * The command to activate survey.
+     */
+    String CMD_ACTIVATE_SURVEY = "activate_survey";
+
     // ---------------------------------------------------------------
     // bulk names for Http header.
     // ---------------------------------------------------------------
