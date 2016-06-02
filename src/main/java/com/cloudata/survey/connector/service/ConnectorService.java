@@ -7,6 +7,7 @@ package com.cloudata.survey.connector.service;
 
 import com.cloudata.survey.connector.creator.LSurveyRequestCreator;
 import com.cloudata.survey.connector.struct.LSurveyRequest;
+import com.cloudata.survey.connector.view.GetSiteSettingsResponse;
 import com.cloudata.survey.connector.view.InitConnResponse;
 import com.cloudata.survey.connector.view.ListSurveysResponse;
 import com.cloudata.survey.connector.view.SurveyResponse;
@@ -68,4 +69,13 @@ public interface ConnectorService {
      * @return true if and only if the specific survey is activated, otherwise false.
      */
     boolean activateSurvey(final LSurveyRequestCreator requestCreator);
+
+    /**
+     * Execute the request being created by the given request creator.
+     * Returns the response being executed on the server side.
+     *
+     * @param requestCreator the request creator.
+     * @return the response
+     */
+    GetSiteSettingsResponse getSiteSettings(final LSurveyRequestCreator requestCreator);
 }

@@ -5,12 +5,14 @@
 
 package com.cloudata.survey.connector.service;
 
+import com.cloudata.survey.connector.LSurveyConfigs;
 import com.cloudata.survey.connector.LSurveyConstants;
 import com.cloudata.survey.connector.creator.LSurveyRequestCreator;
 import com.cloudata.survey.connector.creator.SimpleHttpClientCreator;
 import com.cloudata.survey.connector.creator.SimpleHttpMethodCreator;
 import com.cloudata.survey.connector.struct.*;
 import com.cloudata.survey.connector.utils.LimeSurveyManager;
+import com.cloudata.survey.connector.view.GetSiteSettingsResponse;
 import com.cloudata.survey.connector.view.InitConnResponse;
 import com.cloudata.survey.connector.view.ListSurveysResponse;
 import com.cloudata.survey.connector.view.SurveyResponse;
@@ -143,5 +145,22 @@ public class ConnectorServiceTest {
         });
 
         Assert.assertTrue(succeed);
+    }
+
+    @Test
+    public void testGetSiteSettings() {
+        // pls correct me for testing
+        final String SESSION_KEY = "p7i6zb7zibrxprhvmaid6nht7g2z8pm8";
+        GetSiteSettingsResponse response = service.getSiteSettings(new LSurveyRequestCreator() {
+            public LSurveyRequest create() {
+                GetSiteSettingsRequest reqParams = new GetSiteSettingsRequest(SESSION_KEY, LSurveyConfigs.CONFIG_ALLOWED_RESOURCE_UPLOADS);
+
+                return new LSurveyRequest(LSurveyConstants.CMD_GET_SITE_SETTINGS, reqParams);
+            }
+        });
+
+        Assert.assertNotNull(response);
+        Assert.assertNotNull(response.getSettingVal());
+        System.out.println(response);
     }
 }

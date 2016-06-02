@@ -46,6 +46,11 @@ public interface LSurveyConstants {
      */
     String CMD_ACTIVATE_SURVEY = "activate_survey";
 
+    /**
+     * The command to get site settings.
+     */
+    String CMD_GET_SITE_SETTINGS = "get_site_settings";
+
     // ---------------------------------------------------------------
     // bulk names for Http header.
     // ---------------------------------------------------------------
@@ -159,7 +164,16 @@ public interface LSurveyConstants {
      */
     String SERIALIZED_ACTIVATE = "active";
 
+    /**
+     * The setting name.
+     */
+    String SERIALIZED_SETTING_NAME = "sSetttingName";
+
     // bulk of names used to represent the status
     String LS_OK = "OK";
 
+    /**
+     * The comma symbol
+     */
+    String LS_COMMA = ",";
 }
