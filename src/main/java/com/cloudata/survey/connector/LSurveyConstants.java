@@ -47,6 +47,11 @@ public interface LSurveyConstants {
     String CMD_ACTIVATE_SURVEY = "activate_survey";
 
     /**
+     * The command to get survey properties.
+     */
+    String CMD_GET_SURVEY_PROPERTIES = "get_survey_properties";
+
+    /**
      * The command to get site settings.
      */
     String CMD_GET_SITE_SETTINGS = "get_site_settings";

@@ -64,6 +64,10 @@ public class ConnectorSerivceImpl implements ConnectorService {
         return succeed;
     }
 
+    public GetSiteSettingsResponse getSurveyProperties(LSurveyRequestCreator requestCreator) {
+        return manager.execute(requestCreator, GetSiteSettingsResponse.class);
+    }
+
     public GetSiteSettingsResponse getSiteSettings(LSurveyRequestCreator requestCreator) {
         return manager.execute(requestCreator, GetSiteSettingsResponse.class);
     }

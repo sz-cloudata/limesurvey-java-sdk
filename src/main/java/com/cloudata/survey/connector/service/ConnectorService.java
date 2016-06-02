@@ -75,6 +75,15 @@ public interface ConnectorService {
      * Returns the response being executed on the server side.
      *
      * @param requestCreator the request creator.
+     * @return the response.
+     */
+    GetSiteSettingsResponse getSurveyProperties(final LSurveyRequestCreator requestCreator);
+
+    /**
+     * Execute the request being created by the given request creator.
+     * Returns the response being executed on the server side.
+     *
+     * @param requestCreator the request creator.
      * @return the response
      */
     GetSiteSettingsResponse getSiteSettings(final LSurveyRequestCreator requestCreator);
