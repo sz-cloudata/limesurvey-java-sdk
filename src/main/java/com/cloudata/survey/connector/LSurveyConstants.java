@@ -56,6 +56,11 @@ public interface LSurveyConstants {
      */
     String CMD_GET_SITE_SETTINGS = "get_site_settings";
 
+    /**
+     * The command to set survey properties.
+     */
+    String CMD_SET_SURVEY_PROPERTIES = "set_survey_properties";
+
     // ---------------------------------------------------------------
     // bulk names for Http header.
     // ---------------------------------------------------------------
@@ -102,7 +107,12 @@ public interface LSurveyConstants {
     /**
      * The survey format.
      */
-    public static final String SERIALIZED_SURVEY_FORMAT = "sformat";
+    String SERIALIZED_SURVEY_FORMAT = "sformat";
+
+    /**
+     * The format in survey properties.
+     */
+    String SERIALIZED_FORMAT = "format";
 
     /**
      * The method for action performed.
@@ -174,6 +184,46 @@ public interface LSurveyConstants {
      */
     String SERIALIZED_SETTING_NAME = "sSetttingName";
 
+    /**
+     * The owner ID.
+     */
+    String SERIALIZED_OWNER_ID = "owner_id";
+
+    /**
+     * The template used.
+     */
+    String SERIALIZED_SURVEY_TEMPLATE = "template";
+
+    /**
+     * Fax to.
+     */
+    String SERIALIZED_FAX_TO = "faxto";
+
+    /**
+     * Anonymized.
+     */
+    String SERIALIZED_ANONYMIZED = "anonymized";
+
+    /**
+     * The admin email
+     */
+    String SERIALIZED_ADMIN_EMAIL = "adminemail";
+
+    /**
+     * The admin.
+     */
+    String SERIALIZED_ADMIN = "admin";
+
+    /**
+     * The array of survey settings.
+     */
+    String SERIALIZED_SURVEY_SETTINGS = "aSurveySettings";
+
+    /**
+     * array of survey data.
+     */
+    String SERIALIZED_ARR_SURVEY_DATA = "aSurveyData";
+
     // bulk of names used to represent the status
     String LS_OK = "OK";
 
@@ -181,4 +231,5 @@ public interface LSurveyConstants {
      * The comma symbol
      */
     String LS_COMMA = ",";
+
 }

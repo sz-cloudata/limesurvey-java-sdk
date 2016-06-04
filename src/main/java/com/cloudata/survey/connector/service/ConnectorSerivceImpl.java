@@ -7,6 +7,7 @@ package com.cloudata.survey.connector.service;
 
 import com.cloudata.survey.connector.LSurveyConstants;
 import com.cloudata.survey.connector.creator.LSurveyRequestCreator;
+import com.cloudata.survey.connector.struct.GetSurveyPropertiesRequest;
 import com.cloudata.survey.connector.utils.LimeSurveyManager;
 import com.cloudata.survey.connector.view.*;
 
@@ -64,8 +65,12 @@ public class ConnectorSerivceImpl implements ConnectorService {
         return succeed;
     }
 
-    public GetSiteSettingsResponse getSurveyProperties(LSurveyRequestCreator requestCreator) {
-        return manager.execute(requestCreator, GetSiteSettingsResponse.class);
+    public GetSurveyPropertiesResponse getSurveyProperties(LSurveyRequestCreator requestCreator) {
+        return manager.execute(requestCreator, GetSurveyPropertiesResponse.class);
+    }
+
+    public boolean setSurveyProperties(LSurveyRequestCreator requestCreator) {
+        return false;
     }
 
     public GetSiteSettingsResponse getSiteSettings(LSurveyRequestCreator requestCreator) {

@@ -7,10 +7,7 @@ package com.cloudata.survey.connector.service;
 
 import com.cloudata.survey.connector.creator.LSurveyRequestCreator;
 import com.cloudata.survey.connector.struct.LSurveyRequest;
-import com.cloudata.survey.connector.view.GetSiteSettingsResponse;
-import com.cloudata.survey.connector.view.InitConnResponse;
-import com.cloudata.survey.connector.view.ListSurveysResponse;
-import com.cloudata.survey.connector.view.SurveyResponse;
+import com.cloudata.survey.connector.view.*;
 
 /**
  * The service, which served the client with survey manipulation.
@@ -77,7 +74,16 @@ public interface ConnectorService {
      * @param requestCreator the request creator.
      * @return the response.
      */
-    GetSiteSettingsResponse getSurveyProperties(final LSurveyRequestCreator requestCreator);
+    GetSurveyPropertiesResponse getSurveyProperties(final LSurveyRequestCreator requestCreator);
+
+    /**
+     * Executes the request being created by the given request creator.
+     * Returns true if and only if the survey specified is updated according to the request, otherwise false.
+     *
+     * @param requestCreator the request creator.
+     * @return true if and only if the survey specified is updated, otherwise false.
+     */
+    boolean setSurveyProperties(final LSurveyRequestCreator requestCreator);
 
     /**
      * Execute the request being created by the given request creator.
@@ -87,4 +93,5 @@ public interface ConnectorService {
      * @return the response
      */
     GetSiteSettingsResponse getSiteSettings(final LSurveyRequestCreator requestCreator);
+
 }

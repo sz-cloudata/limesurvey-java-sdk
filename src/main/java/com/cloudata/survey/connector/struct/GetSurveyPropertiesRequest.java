@@ -5,6 +5,11 @@
 
 package com.cloudata.survey.connector.struct;
 
+import com.cloudata.survey.connector.LSurveyConstants;
+import com.cloudata.survey.connector.utils.StringUtils;
+
+import java.util.List;
+
 /**
  * The request parameters that associated with when {@link com.cloudata.survey.connector.LSurveyConstants#CMD_GET_SURVEY_PROPERTIES} is sent.
  *
@@ -19,7 +24,7 @@ public class GetSurveyPropertiesRequest implements ReqParams {
     /**
      * The survey settings.
      */
-    private String[] surveySettings;
+    private List<String> surveySettings;
 
     /**
      * Empty constructor of {@link GetSurveyPropertiesRequest}.
@@ -33,7 +38,7 @@ public class GetSurveyPropertiesRequest implements ReqParams {
      * @param surveyId the survey id.
      * @param surveySettings the survey settings.
      */
-    public GetSurveyPropertiesRequest(final String sessionKey, final int surveyId, final String[] surveySettings) {
+    public GetSurveyPropertiesRequest(final String sessionKey, final int surveyId, final List<String> surveySettings) {
         setSurveyInSession(sessionKey, surveyId);
         this.surveySettings = surveySettings;
     }
@@ -46,11 +51,18 @@ public class GetSurveyPropertiesRequest implements ReqParams {
         return surveyInSession;
     }
 
-    public String[] getSurveySettings() {
+    public List<String> getSurveySettings() {
         return surveySettings;
     }
 
-    public void setSurveySettings(final String[] surveySettings) {
+    public void setSurveySettings(final List<String> surveySettings) {
         this.surveySettings = surveySettings;
+    }
+
+    @Override
+    public String toString() {
+        return "\"" + LSurveyConstants.SERIALIZED_SESSION_KEY + "\": \"" + surveyInSession.getSessionKey() + "\"" +
+                ", \"" + LSurveyConstants.SERIALIZED_WISHED_SURVEY_ID + "\": " + surveyInSession.getSurveyId() +
+                ", \"" + LSurveyConstants.SERIALIZED_SURVEY_SETTINGS + "\": " + StringUtils.doubleQuoteStringIn(getSurveySettings());
     }
 }

@@ -9,6 +9,7 @@
 
 package com.cloudata.survey.connector.utils;
 
+import com.cloudata.survey.connector.callback.ProcessResultCallback;
 import com.cloudata.survey.connector.context.JsonResultMapper;
 import com.cloudata.survey.connector.creator.HttpClientCreator;
 import com.cloudata.survey.connector.creator.HttpMethodCreator;
@@ -77,6 +78,35 @@ public class LimeSurveyManager {
                 resp = JsonResultMapper.map(json, expected);
             }
 
+        } catch (IOException e) {
+            exception = e;
+            resp = null;
+        }
+
+        return resp;
+    }
+
+    public <T> T execute(final LSurveyRequestCreator requestCreator, final ProcessResultCallback<T> callback) {
+        if (requestCreator == null) {
+            throw new IllegalArgumentException("request creator should not be null");
+        }
+
+        T resp = null;
+        HttpClient client = clientCreator.createHttpClient();
+        LSurveyRequest request = requestCreator.create();
+        try {
+            StringEntity entity = request.toEntity();
+            HttpPost post = methodCreator.createHttpPost(uri, entity);
+            HttpResponse response = client.execute(post);
+            if (HttpStatus.SC_OK == response.getStatusLine().getStatusCode()) {
+                HttpEntity httpEntity = response.getEntity();
+                String json = EntityUtils.toString(httpEntity);
+                if (null == callback) {
+                    return (T) json;
+                }
+
+                resp = callback.doWithResult(json);
+            }
         } catch (IOException e) {
             exception = e;
             resp = null;

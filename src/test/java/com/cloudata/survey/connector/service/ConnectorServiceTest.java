@@ -12,13 +12,14 @@ import com.cloudata.survey.connector.creator.SimpleHttpClientCreator;
 import com.cloudata.survey.connector.creator.SimpleHttpMethodCreator;
 import com.cloudata.survey.connector.struct.*;
 import com.cloudata.survey.connector.utils.LimeSurveyManager;
-import com.cloudata.survey.connector.view.GetSiteSettingsResponse;
-import com.cloudata.survey.connector.view.InitConnResponse;
-import com.cloudata.survey.connector.view.ListSurveysResponse;
-import com.cloudata.survey.connector.view.SurveyResponse;
+import com.cloudata.survey.connector.view.*;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.logging.StreamHandler;
 
 /**
  * A test for {@link ConnectorService}.
@@ -161,6 +162,32 @@ public class ConnectorServiceTest {
 
         Assert.assertNotNull(response);
         Assert.assertNotNull(response.getSettingVal());
+        System.out.println(response);
+    }
+
+    @Test
+    public void testGetSurveySettings() {
+        // pls correct me for testing
+        final String SESSION_KEY = "s8vgxt6ytr58ex9ky8yzr4z5kffthcua";
+        final int SURVEY_ID = 818388;
+
+        GetSurveyPropertiesResponse response = service.getSurveyProperties(new LSurveyRequestCreator() {
+            public LSurveyRequest create() {
+                GetSurveyPropertiesRequest reqParams = new GetSurveyPropertiesRequest();
+                reqParams.setSurveyInSession(SESSION_KEY, SURVEY_ID);
+
+                List<String> surveySettings = new ArrayList<String>();
+                surveySettings.add(LSurveyConstants.SERIALIZED_SURVEY_TEMPLATE);
+                surveySettings.add(LSurveyConstants.SERIALIZED_FAX_TO);
+                surveySettings.add(LSurveyConstants.SERIALIZED_LIST_SURVEY_ID);
+                reqParams.setSurveySettings(surveySettings);
+
+                return new LSurveyRequest(LSurveyConstants.CMD_GET_SURVEY_PROPERTIES, reqParams);
+            }
+        });
+
+        Assert.assertNotNull(response);
+        Assert.assertNotNull(response.getSurveyProperties());
         System.out.println(response);
     }
 }
