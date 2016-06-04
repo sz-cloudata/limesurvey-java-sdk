@@ -70,14 +70,39 @@ public class ConnectorSerivceImpl implements ConnectorService {
     }
 
     public boolean setSurveyProperties(LSurveyRequestCreator requestCreator) {
+        //FIXME do the concrete implementation.
         return false;
+    }
+
+    public GetAllSummariesResponse getAllSummaries(LSurveyRequestCreator requestCreator) {
+        return manager.execute(requestCreator, GetAllSummariesResponse.class);
     }
 
     public GetSiteSettingsResponse getSiteSettings(LSurveyRequestCreator requestCreator) {
         return manager.execute(requestCreator, GetSiteSettingsResponse.class);
     }
 
-    public void setManager(LimeSurveyManager manager) {
+    public AddGroupResponse addGroup(LSurveyRequestCreator requestCreator) {
+        return manager.execute(requestCreator, AddGroupResponse.class);
+    }
+
+    public boolean deleteGroup(LSurveyRequestCreator requestCreator) {
+        // the respond string is the group id removed already.
+        AddGroupResponse response = manager.execute(requestCreator, AddGroupResponse.class);
+        boolean succeed = false;
+        if (response != null && response.getGroupId() > 0) {
+            succeed = true;
+        }
+
+        return succeed;
+    }
+
+    public ListGroupsResponse listGroups(LSurveyRequestCreator requestCreator) {
+        //FIXME the json parsing error.
+        return manager.execute(requestCreator, ListGroupsResponse.class);
+    }
+
+    public void setManager(final LimeSurveyManager manager) {
         this.manager = manager;
     }
 }

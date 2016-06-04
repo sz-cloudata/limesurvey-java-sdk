@@ -16,7 +16,7 @@ public class SurveyInSession extends ConnRequest {
     /**
      * The survey ID.
      */
-    private int surveyId = 0;
+    protected int surveyId = 0;
 
     /**
      * Empty constructor of {@link SurveyInSession}.

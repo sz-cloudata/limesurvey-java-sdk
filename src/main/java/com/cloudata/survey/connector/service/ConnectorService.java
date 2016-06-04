@@ -86,6 +86,15 @@ public interface ConnectorService {
     boolean setSurveyProperties(final LSurveyRequestCreator requestCreator);
 
     /**
+     * Executes the request being created by the given request creator.
+     * Returns the response generated after specific command is finished.
+     *
+     * @param requestCreator the request creator.
+     * @return the response generated.
+     */
+    GetAllSummariesResponse getAllSummaries(final LSurveyRequestCreator requestCreator);
+
+    /**
      * Execute the request being created by the given request creator.
      * Returns the response being executed on the server side.
      *
@@ -94,4 +103,13 @@ public interface ConnectorService {
      */
     GetSiteSettingsResponse getSiteSettings(final LSurveyRequestCreator requestCreator);
 
+    // ----------------------------------------------------------------------------------
+    // bulk operations of group
+    // ----------------------------------------------------------------------------------
+
+    AddGroupResponse addGroup(final LSurveyRequestCreator requestCreator);
+
+    boolean deleteGroup(final LSurveyRequestCreator requestCreator);
+
+    ListGroupsResponse listGroups(final LSurveyRequestCreator requestCreator);
 }

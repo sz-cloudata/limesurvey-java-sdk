@@ -19,17 +19,17 @@ public interface LSurveyConstants {
     /**
      * The command to get_session_id.
      */
-    public static final String CMD_GET_SESSION_KEY = "get_session_key";
+    String CMD_GET_SESSION_KEY = "get_session_key";
 
     /**
      * The command to release_session_id.
      */
-    public static final String CMD_RELEASE_SESSION_KEY = "release_session_key";
+    String CMD_RELEASE_SESSION_KEY = "release_session_key";
 
     /**
      * The command to add survey.
      */
-    public static final String CMD_ADD_SURVEY = "add_survey";
+    String CMD_ADD_SURVEY = "add_survey";
 
     /**
      * The command to delete survey.
@@ -61,25 +61,42 @@ public interface LSurveyConstants {
      */
     String CMD_SET_SURVEY_PROPERTIES = "set_survey_properties";
 
+    /**
+     * The command to get survey summary.
+     */
+    String CMD_GET_SUMMARY = "get_summary";
+
+    /**
+     * The command to add group.
+     */
+    String CMD_ADD_GROUP = "add_group";
+
+    String CMD_DELETE_GROUP = "delete_group";
+
+    /**
+     * The command to list available groups.
+     */
+    String CMD_LIST_GROUPS = "list_groups";
+
     // ---------------------------------------------------------------
     // bulk names for Http header.
     // ---------------------------------------------------------------
     /**
      * The content type in http header.
      */
-    public static final String HTTP_HEADER_CONTENT_TYPE = "content-type";
+    String HTTP_HEADER_CONTENT_TYPE = "content-type";
 
     /**
      * The Json response.
      */
-    public static final String HTTP_HEADER_CONTENT_TYPE_JSON = "application/json";
+    String HTTP_HEADER_CONTENT_TYPE_JSON = "application/json";
 
     /**
      * The connection in http header.
      */
-    public static final String HTTP_HEADER_CONNECTION = "connection";
+    String HTTP_HEADER_CONNECTION = "connection";
 
-    public static final String HTTP_HEADER_CONNECTION_KEEP_ALIVE = "Keep-Alive";
+    String HTTP_HEADER_CONNECTION_KEEP_ALIVE = "Keep-Alive";
 
     // ---------------------------------------------------------------
     // bulk names for Json elements.
@@ -87,22 +104,22 @@ public interface LSurveyConstants {
     /**
      * The name in Json element for session key.
      */
-    public static final String SERIALIZED_SESSION_KEY = "sSessionKey";
+    String SERIALIZED_SESSION_KEY = "sSessionKey";
 
     /**
      * The wished survey id.
      */
-    public static final String SERIALIZED_WISHED_SURVEY_ID = "iSurveyID";
+    String SERIALIZED_WISHED_SURVEY_ID = "iSurveyID";
 
     /**
      * The survey title.
      */
-    public static final String SERIALIZED_SURVEY_TITLE = "sSurveyTitle";
+    String SERIALIZED_SURVEY_TITLE = "sSurveyTitle";
 
     /**
      * The survey language.
      */
-    public static final String SERIALIZED_SURVEY_LANGUAGE = "sSurveyLanguage";
+    String SERIALIZED_SURVEY_LANGUAGE = "sSurveyLanguage";
 
     /**
      * The survey format.
@@ -224,6 +241,27 @@ public interface LSurveyConstants {
      */
     String SERIALIZED_ARR_SURVEY_DATA = "aSurveyData";
 
+    /**
+     * The stat name.
+     */
+    String SERIALIZED_STAT_NAME = "sStatName";
+
+    String SERIALIZED_FULL_RESPONSES = "full_responses";
+
+    String SERIALIZED_INCOMPLETED_RESPONSES = "incomplete_responses";
+    String SERIALIZED_COMPLETED_RESPONSES = "completed_responses";
+    String SERIALIZED_TOKEN_COMPLETED = "token_completed";
+
+    String SERIALIZED_TOKEN_OPTED_OUT = "token_opted_out";
+    String SERIALIZED_TOKEN_SENT = "token_sent";
+    String SERIALIZED_TOKEN_INVALID = "token_invalid";
+    String SERIALIZED_TOKEN_COUNT = "token_count";
+
+    String SERIALIZED_GROUP_TITLE = "sGroupTitle";
+    String SERIALIZED_GROUP_DESCRIPTION = "sGroupDescription";
+
+    String SERIALIZED_GROUP_ID = "iGroupID";
+
     // bulk of names used to represent the status
     String LS_OK = "OK";
 
@@ -232,4 +270,11 @@ public interface LSurveyConstants {
      */
     String LS_COMMA = ",";
 
+    String SERIALIZED_GROUP_RELEVANCE = "grelevance";
+    String SERIALIZED_RANDOMIZED_GROUP = "randomization_group";
+    String SERIALIZED_LANGUAGE = "language";
+    String SERIALIZED_LIST_GROUP_DESC = "description";
+    String SERIALIZED_GROUP_ORDER = "group_order";
+    String SERIALIZED_GROUP_NAME = "group_name";
+    String SERIALIZED_LIST_GROUP_ID = "gid";
 }

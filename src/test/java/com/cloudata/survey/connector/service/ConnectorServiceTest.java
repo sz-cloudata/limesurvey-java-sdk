@@ -82,7 +82,7 @@ public class ConnectorServiceTest {
     @Test
     public void testAddSurvey() {
         // pls correct the following session key for testing.
-        final String SESSION_KEY = "7sbp5azchew484g6wgijg8633btbtx7s";
+        final String SESSION_KEY = "srykin7sdf4jhj3gtba5adpcw3ppzhi7";
         SurveyResponse resposne = service.addSurvey(new LSurveyRequestCreator() {
 
             public LSurveyRequest create() {
@@ -188,6 +188,81 @@ public class ConnectorServiceTest {
 
         Assert.assertNotNull(response);
         Assert.assertNotNull(response.getSurveyProperties());
+        System.out.println(response);
+    }
+
+    @Test
+    public void testGetAllSummaries() {
+        // pls correct me for testing
+        final String SESSION_KEY = "srykin7sdf4jhj3gtba5adpcw3ppzhi7";
+        final int SURVEY_ID = 818388;
+
+        GetAllSummariesResponse response = service.getAllSummaries(new LSurveyRequestCreator() {
+            public LSurveyRequest create() {
+                GetSummaryRequest reqParams = GetSummaryRequest.getAllSummariesRequest(SESSION_KEY, SURVEY_ID);
+
+                return new LSurveyRequest(LSurveyConstants.CMD_GET_SUMMARY, reqParams);
+            }
+        });
+
+        Assert.assertNotNull(response);
+        Assert.assertNotNull(response.getStatistics());
+        System.out.println(response);
+    }
+
+    @Test
+    public void testAddGroup() {
+        // pls correct me for testing
+        final String SESSION_KEY = "srykin7sdf4jhj3gtba5adpcw3ppzhi7";
+        final int SURVEY_ID = 135443;
+
+        AddGroupResponse response = service.addGroup(new LSurveyRequestCreator() {
+            public LSurveyRequest create() {
+                String groupTitle = "Restful API group test02";
+                String groupDesc = "for restful API add group test";
+                AddGroupRequest reqParams = new AddGroupRequest(SESSION_KEY, SURVEY_ID, groupTitle, groupDesc);
+
+                return new LSurveyRequest(LSurveyConstants.CMD_ADD_GROUP, reqParams);
+            }
+        });
+
+        Assert.assertNotNull(response);
+        System.out.println(response);
+    }
+
+    @Test
+    public void testDeleteGroup() {
+        // pls correct me for testing.
+        final String SESSION_KEY = "srykin7sdf4jhj3gtba5adpcw3ppzhi7";
+        final int SURVEY_ID = 135443;
+        final int GROUP_ID = 4;
+
+        boolean succeed = service.deleteGroup(new LSurveyRequestCreator() {
+            public LSurveyRequest create() {
+                SurveyGroupInSession reqParams = new SurveyGroupInSession(SESSION_KEY, SURVEY_ID, GROUP_ID);
+
+                return new LSurveyRequest(LSurveyConstants.CMD_DELETE_GROUP, reqParams);
+            }
+        });
+
+        Assert.assertTrue(succeed);
+    }
+
+    @Test
+    public void testListGroups() {
+        // pls correct me for testing.
+        final String SESSION_KEY = "srykin7sdf4jhj3gtba5adpcw3ppzhi7";
+        final int SURVEY_ID = 135443;
+
+        ListGroupsResponse response = service.listGroups(new LSurveyRequestCreator() {
+            public LSurveyRequest create() {
+                SurveyInSession reqParams = new SurveyInSession(SESSION_KEY, SURVEY_ID);
+
+                return new LSurveyRequest(LSurveyConstants.CMD_LIST_GROUPS, reqParams);
+            }
+        });
+
+        Assert.assertNotNull(response);
         System.out.println(response);
     }
 }
