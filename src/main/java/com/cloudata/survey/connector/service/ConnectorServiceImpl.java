@@ -116,6 +116,11 @@ public class ConnectorServiceImpl implements ConnectorService {
         return manager.execute(requestCreator, GetGroupPropertiesResponse.class);
     }
 
+    public boolean setGroupProperties(LSurveyRequestCreator requestCreator) {
+        //FIXME how to determine whether it's success
+        return false;
+    }
+
     public void setManager(final LimeSurveyManager manager) {
         this.manager = manager;
     }

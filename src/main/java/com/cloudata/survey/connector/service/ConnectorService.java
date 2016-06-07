@@ -116,4 +116,6 @@ public interface ConnectorService {
     ListGroupsResponse listGroups(final LSurveyRequestCreator requestCreator);
 
     GetGroupPropertiesResponse getGroupProperties(final LSurveyRequestCreator requestCreator);
+
+    boolean setGroupProperties(final LSurveyRequestCreator requestCreator);
 }
