@@ -120,13 +120,14 @@ public class GroupResponseDetails implements Resp {
     @Override
     public String toString() {
         StringBuilder builder = new StringBuilder();
-        builder.append(LSurveyConstants.SERIALIZED_LIST_GROUP_ID).append(": ").append(groupId);
+        builder.append("{" + LSurveyConstants.SERIALIZED_LIST_GROUP_ID).append(": ").append(groupId);
         builder.append(", ").append(LSurveyConstants.SERIALIZED_LIST_SURVEY_ID).append(": ").append(surveyId);
         builder.append(", ").append(LSurveyConstants.SERIALIZED_GROUP_NAME).append(": ").append(groupName);
         builder.append(", ").append(LSurveyConstants.SERIALIZED_LIST_GROUP_DESC).append(": ").append(groupDescription);
         builder.append(", ").append(LSurveyConstants.SERIALIZED_LANGUAGE).append(": ").append(language);
         builder.append(", ").append(LSurveyConstants.SERIALIZED_RANDOMIZED_GROUP).append(": ").append(randomizedGroup);
         builder.append(", ").append(LSurveyConstants.SERIALIZED_GROUP_RELEVANCE).append(": ").append(groupRelevance);
+        builder.append("}");
 
         return builder.toString();
     }

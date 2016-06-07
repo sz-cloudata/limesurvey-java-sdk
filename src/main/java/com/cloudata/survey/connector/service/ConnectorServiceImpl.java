@@ -1,15 +1,26 @@
 /**
- * File name: ConnectorSerivceImpl Author: Dorsey Q F TANG Date: 5/28/16 -----------------------------------------------------
+ * File name: ConnectorServiceImpl Author: Dorsey Q F TANG Date: 5/28/16 -----------------------------------------------------
  * Description: -----------------------------------------------------
  */
 
 package com.cloudata.survey.connector.service;
 
 import com.cloudata.survey.connector.LSurveyConstants;
+import com.cloudata.survey.connector.callback.ProcessResultCallback;
 import com.cloudata.survey.connector.creator.LSurveyRequestCreator;
+import com.cloudata.survey.connector.struct.GetGroupPropertiesRequest;
 import com.cloudata.survey.connector.struct.GetSurveyPropertiesRequest;
+import com.cloudata.survey.connector.struct.ReqParams;
 import com.cloudata.survey.connector.utils.LimeSurveyManager;
 import com.cloudata.survey.connector.view.*;
+import com.google.gson.Gson;
+import com.google.gson.JsonElement;
+import com.google.gson.JsonObject;
+import com.google.gson.JsonParser;
+
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 /**
  * The implementation of {@link ConnectorService}.
@@ -17,7 +28,7 @@ import com.cloudata.survey.connector.view.*;
  * Author: DORSEy
  */
 // TODO please add exception handling code
-public class ConnectorSerivceImpl implements ConnectorService {
+public class ConnectorServiceImpl implements ConnectorService {
 
     /**
      * The manager of LimeSurvey.
@@ -98,8 +109,11 @@ public class ConnectorSerivceImpl implements ConnectorService {
     }
 
     public ListGroupsResponse listGroups(LSurveyRequestCreator requestCreator) {
-        //FIXME the json parsing error.
         return manager.execute(requestCreator, ListGroupsResponse.class);
+    }
+
+    public GetGroupPropertiesResponse getGroupProperties(final LSurveyRequestCreator requestCreator) {
+        return manager.execute(requestCreator, GetGroupPropertiesResponse.class);
     }
 
     public void setManager(final LimeSurveyManager manager) {

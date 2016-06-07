@@ -78,6 +78,11 @@ public interface LSurveyConstants {
      */
     String CMD_LIST_GROUPS = "list_groups";
 
+    /**
+     * The command to get group settings.
+     */
+    String CMD_GET_GROUP_PROPERTIES = "get_group_properties";
+
     // ---------------------------------------------------------------
     // bulk names for Http header.
     // ---------------------------------------------------------------
@@ -277,4 +282,5 @@ public interface LSurveyConstants {
     String SERIALIZED_GROUP_ORDER = "group_order";
     String SERIALIZED_GROUP_NAME = "group_name";
     String SERIALIZED_LIST_GROUP_ID = "gid";
+    String SERIALIZED_ARR_GROUP_SETTINGS = "aGroupSettings";
 }

@@ -9,6 +9,8 @@ import com.cloudata.survey.connector.creator.LSurveyRequestCreator;
 import com.cloudata.survey.connector.struct.LSurveyRequest;
 import com.cloudata.survey.connector.view.*;
 
+import java.util.Map;
+
 /**
  * The service, which served the client with survey manipulation.
  * <p>
@@ -112,4 +114,6 @@ public interface ConnectorService {
     boolean deleteGroup(final LSurveyRequestCreator requestCreator);
 
     ListGroupsResponse listGroups(final LSurveyRequestCreator requestCreator);
+
+    GetGroupPropertiesResponse getGroupProperties(final LSurveyRequestCreator requestCreator);
 }

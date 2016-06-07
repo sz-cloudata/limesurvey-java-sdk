@@ -19,7 +19,7 @@ import org.junit.Test;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.logging.StreamHandler;
+import java.util.Map;
 
 /**
  * A test for {@link ConnectorService}.
@@ -43,8 +43,8 @@ public class ConnectorServiceTest {
         manager.setMethodCreator(new SimpleHttpMethodCreator());
         manager.setClientCreator(new SimpleHttpClientCreator());
 
-        service = new ConnectorSerivceImpl();
-        ((ConnectorSerivceImpl) service).setManager(manager);
+        service = new ConnectorServiceImpl();
+        ((ConnectorServiceImpl) service).setManager(manager);
     }
 
     @Test
@@ -168,7 +168,7 @@ public class ConnectorServiceTest {
     @Test
     public void testGetSurveySettings() {
         // pls correct me for testing
-        final String SESSION_KEY = "s8vgxt6ytr58ex9ky8yzr4z5kffthcua";
+        final String SESSION_KEY = "qc896y8bki5r2wvxzbzd29vz8k5p92vq";
         final int SURVEY_ID = 818388;
 
         GetSurveyPropertiesResponse response = service.getSurveyProperties(new LSurveyRequestCreator() {
@@ -251,7 +251,7 @@ public class ConnectorServiceTest {
     @Test
     public void testListGroups() {
         // pls correct me for testing.
-        final String SESSION_KEY = "srykin7sdf4jhj3gtba5adpcw3ppzhi7";
+        final String SESSION_KEY = "qc896y8bki5r2wvxzbzd29vz8k5p92vq";
         final int SURVEY_ID = 135443;
 
         ListGroupsResponse response = service.listGroups(new LSurveyRequestCreator() {
@@ -264,5 +264,27 @@ public class ConnectorServiceTest {
 
         Assert.assertNotNull(response);
         System.out.println(response);
+    }
+
+    @Test
+    public void testGetGroupProperties() {
+        final String SESSION_KEY = "qc896y8bki5r2wvxzbzd29vz8k5p92vq";
+        final int GROUP_ID = 6;
+        GetGroupPropertiesResponse result = service.getGroupProperties(new LSurveyRequestCreator() {
+            public LSurveyRequest create() {
+                GetGroupPropertiesRequest reqParams = new GetGroupPropertiesRequest(SESSION_KEY, GROUP_ID, null);
+
+                List<String> groupSettingNames = new ArrayList<String>();
+                groupSettingNames.add("gid");
+                groupSettingNames.add("group_name");
+
+                reqParams.setGroupSettings(groupSettingNames);
+
+                return new LSurveyRequest(LSurveyConstants.CMD_GET_GROUP_PROPERTIES, reqParams);
+            }
+        });
+
+        Assert.assertNotNull(result);
+        System.out.println(result);
     }
 }
