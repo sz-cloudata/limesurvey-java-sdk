@@ -16,7 +16,9 @@ THIS_SCRIPT=$(basename $0)
 #: the usage description
 function usage() {
 	printf "Usage: %s -m <method> -p <params>\n" $THIS_SCRIPT
-	printf "%s -m get_session_key -p username=yunshu,password=z"
+	printf "%s -m get_session_key -p username=yunshu password=z\n" $THIS_SCRIPT
+	printf "%s -m get_survey_properties -p sSessionKey=xx iSurveyID=1 aSurveySetting=[hello,world]\n" $THIS_SCRIPT
+	printf "%s -m set_survey_properties -p sSessionKey=xx iSurveyID=1 aSurveyData={feng:dorsey}\n" $THIS_SCRIPT
 	exit 1
 }
 
