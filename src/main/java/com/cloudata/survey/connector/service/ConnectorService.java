@@ -111,11 +111,51 @@ public interface ConnectorService {
 
     AddGroupResponse addGroup(final LSurveyRequestCreator requestCreator);
 
+    /**
+     * Remove the group according to the request being created by request creator.
+     * Returns true if and only if the specific group is removed, otherwise false.
+     *
+     * @param requestCreator the request creator.
+     * @return true if and only if the specific group is removed, otherwise false.
+     */
     boolean deleteGroup(final LSurveyRequestCreator requestCreator);
 
+    /**
+     * Retrieves all available groups according to the request being created by request creator.
+     *
+     * @param requestCreator the request creator.
+     * @return a list of available groups.
+     */
     ListGroupsResponse listGroups(final LSurveyRequestCreator requestCreator);
 
+    /**
+     * Retrieves the group properties according to the request being created by request creator.
+     *
+     * @param requestCreator the request creator.
+     * @return the group properties requested with its value.
+     */
     GetGroupPropertiesResponse getGroupProperties(final LSurveyRequestCreator requestCreator);
 
+    /**
+     * Update the group properties according to the request created by the given request creator.
+     * Returns true if and only if the properties being updated are all succeed, otherwise false.
+     *
+     * @param requestCreator the request creator.
+     * @return true if and only if the properties to be updated is updated, otherwise false.
+     */
     boolean setGroupProperties(final LSurveyRequestCreator requestCreator);
+
+    // ----------------------------------------------------------------------------------
+    // bulk operations of question
+    // ----------------------------------------------------------------------------------
+
+    /**
+     * Import the question to the specific group according to the request being sent to the server.
+     * Returns the ID of the question if and only if the operation is succeed, otherwise an error phase
+     * will be generated to indicates that the operation failed.
+     *
+     * @param requestCreator the request creator.
+     * @return the response.
+     */
+    ImportQuestionResponse importQuestion(final LSurveyRequestCreator requestCreator);
 }

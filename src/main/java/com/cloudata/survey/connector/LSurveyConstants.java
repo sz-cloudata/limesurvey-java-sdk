@@ -88,6 +88,11 @@ public interface LSurveyConstants {
      */
     String CMD_SET_GROUP_PROPERTIES = "set_group_properties";
 
+    /**
+     * The command to import questions.
+     */
+    String CMD_IMPORT_QUESTION = "import_question";
+
     // ---------------------------------------------------------------
     // bulk names for Http header.
     // ---------------------------------------------------------------
@@ -289,4 +294,7 @@ public interface LSurveyConstants {
     String SERIALIZED_LIST_GROUP_ID = "gid";
     String SERIALIZED_ARR_GROUP_SETTINGS = "aGroupSettings";
     String SERIALIZED_ARR_GROUP_DATA = "aGroupData";
+    String SERIALIZED_QUESTION_IMPORT_DATA = "sImportData";
+    String SERIALIZED_QUESTION_IMPORT_DATA_TYPE = "sImportDataType";
+    String SERIALIZED_MANDATORY = "sMandatory";
 }

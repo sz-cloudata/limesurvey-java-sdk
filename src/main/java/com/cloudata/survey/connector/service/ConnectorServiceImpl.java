@@ -160,6 +160,10 @@ public class ConnectorServiceImpl implements ConnectorService {
         return succeed;
     }
 
+    public ImportQuestionResponse importQuestion(LSurveyRequestCreator requestCreator) {
+        return null;
+    }
+
     public void setManager(final LimeSurveyManager manager) {
         this.manager = manager;
     }
