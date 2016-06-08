@@ -16,8 +16,10 @@ import com.cloudata.survey.connector.view.*;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
+import org.omg.CORBA.OBJ_ADAPTER;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -192,6 +194,26 @@ public class ConnectorServiceTest {
     }
 
     @Test
+    public void testSetSurveyProperties() {
+        // pls correct me for testing
+        final String SESSION_KEY = "28rfh6zb28s9f22gjuv5yru9pjg6mbam";
+        final int SURVEY_ID = 135443;
+
+        boolean result = service.setSurveyProperties(new LSurveyRequestCreator() {
+            public LSurveyRequest create() {
+                SetSurveyPropertiesRequest reqParams = new SetSurveyPropertiesRequest(SESSION_KEY, SURVEY_ID);
+                Map<String, Object> settings = new HashMap<String, Object>();
+                settings.put("faxto", "Dorsey for testing");
+                reqParams.setSurveyData(settings);
+
+                return new LSurveyRequest(LSurveyConstants.CMD_SET_SURVEY_PROPERTIES, reqParams);
+            }
+        });
+
+        Assert.assertTrue(result);
+    }
+
+    @Test
     public void testGetAllSummaries() {
         // pls correct me for testing
         final String SESSION_KEY = "srykin7sdf4jhj3gtba5adpcw3ppzhi7";
@@ -286,5 +308,23 @@ public class ConnectorServiceTest {
 
         Assert.assertNotNull(result);
         System.out.println(result);
+    }
+
+    @Test
+    public void testSetGroupProperties() {
+        final String SESSION_KEY = "28rfh6zb28s9f22gjuv5yru9pjg6mbam";
+        final int GROUP_ID = 6;
+        boolean result = service.setGroupProperties(new LSurveyRequestCreator() {
+            public LSurveyRequest create() {
+                SetGroupPropertiesRequest reqParams = new SetGroupPropertiesRequest(SESSION_KEY, GROUP_ID, null);
+                Map<String, Object> properties = new HashMap<String, Object>();
+                properties.put("group_name", "group properties set testing");
+                reqParams.setProperties(properties);
+
+                return new LSurveyRequest(LSurveyConstants.CMD_SET_GROUP_PROPERTIES, reqParams);
+            }
+        });
+
+        Assert.assertTrue(result);
     }
 }

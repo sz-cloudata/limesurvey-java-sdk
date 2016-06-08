@@ -33,6 +33,16 @@ public class SetSurveyPropertiesRequest implements ReqParams {
     public SetSurveyPropertiesRequest() {}
 
     /**
+     * Constructor of {@link SetSurveyPropertiesRequest}, with session key and survey ID specified.
+     *
+     * @param sessionKey the session key.
+     * @param surveyId the survey ID.
+     */
+    public SetSurveyPropertiesRequest(final String sessionKey, final int surveyId) {
+        this(sessionKey, surveyId, null);
+    }
+
+    /**
      * Constructor of {@link SetSurveyPropertiesRequest}, with session key, survey id and survey data specified.
      *
      * @param sessionKey the session key.
