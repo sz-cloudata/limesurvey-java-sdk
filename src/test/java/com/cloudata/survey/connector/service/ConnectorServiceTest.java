@@ -84,12 +84,12 @@ public class ConnectorServiceTest {
     @Test
     public void testAddSurvey() {
         // pls correct the following session key for testing.
-        final String SESSION_KEY = "srykin7sdf4jhj3gtba5adpcw3ppzhi7";
+        final String SESSION_KEY = "28rfh6zb28s9f22gjuv5yru9pjg6mbam";
         SurveyResponse resposne = service.addSurvey(new LSurveyRequestCreator() {
 
             public LSurveyRequest create() {
                 AddSurveyRequest reqParams = new AddSurveyRequest();
-                reqParams.setSurveyTitle("Restful API test03");
+                reqParams.setSurveyTitle("Restful API test04");
                 reqParams.setSurveyLanguage("en");
                 reqParams.setSurveyFormat(SurveyFormat.A_FORMAT.getVal());
                 reqParams.setSessionKey(SESSION_KEY);
@@ -105,8 +105,8 @@ public class ConnectorServiceTest {
     @Test
     public void testDeleteSurvey() {
         // pls correct the following two constants for testing.
-        final int SURVEY_ID = 561483;
-        final String SESSION_KEY = "7sbp5azchew484g6wgijg8633btbtx7s";
+        final int SURVEY_ID = 135443;
+        final String SESSION_KEY = "28rfh6zb28s9f22gjuv5yru9pjg6mbam";
         boolean succeed = service.deleteSurvey(new LSurveyRequestCreator() {
             public LSurveyRequest create() {
                 DeleteSurveyRequest reqParams = new DeleteSurveyRequest(SESSION_KEY, SURVEY_ID);
@@ -235,8 +235,8 @@ public class ConnectorServiceTest {
     @Test
     public void testAddGroup() {
         // pls correct me for testing
-        final String SESSION_KEY = "srykin7sdf4jhj3gtba5adpcw3ppzhi7";
-        final int SURVEY_ID = 135443;
+        final String SESSION_KEY = "28rfh6zb28s9f22gjuv5yru9pjg6mbam";
+        final int SURVEY_ID = 846936;
 
         AddGroupResponse response = service.addGroup(new LSurveyRequestCreator() {
             public LSurveyRequest create() {
