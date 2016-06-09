@@ -55,6 +55,11 @@ public class LSurveyQuestion implements Serializable {
     private String mandatory;
 
     /**
+     * The language.
+     */
+    private String language;
+
+    /**
      * The answers to this question.
      */
     private List<LSurveyAnswer> answers;
@@ -123,6 +128,22 @@ public class LSurveyQuestion implements Serializable {
         this.mandatory = mandatory;
     }
 
+    public String getLanguage() {
+        return language;
+    }
+
+    public void setLanguage(final String language) {
+        this.language = language;
+    }
+
+    public List<LSurveyAnswer> getAnswers() {
+        return answers;
+    }
+
+    public void setAnswers(final List<LSurveyAnswer> answers) {
+        this.answers = answers;
+    }
+
     @Override
     public String toString() {
         StringBuilder builder = new StringBuilder();
@@ -134,6 +155,7 @@ public class LSurveyQuestion implements Serializable {
         builder.append(", title: ").append(questionTitle);
         builder.append(", question: ").append(question);
         builder.append(", mandatory: ").append(mandatory);
+        builder.append(", language: ").append(language);
         builder.append("}");
 
         return builder.toString();

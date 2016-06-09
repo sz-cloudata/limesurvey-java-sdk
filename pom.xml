@@ -36,6 +36,13 @@
             <artifactId>junit</artifactId>
             <version>4.12</version>
         </dependency>
+
+        <!-- freemarker for template engine -->
+        <dependency>
+            <groupId>org.freemarker</groupId>
+            <artifactId>freemarker</artifactId>
+            <version>2.3.24-incubating</version>
+        </dependency>
     </dependencies>
 
 </project>

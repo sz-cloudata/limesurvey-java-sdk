@@ -69,6 +69,14 @@ public class LSurveyAnswer implements Serializable {
         this.language = language;
     }
 
+    public boolean isDefault() {
+        return isDefault;
+    }
+
+    public void setDefault(final boolean aDefault) {
+        isDefault = aDefault;
+    }
+
     @Override
     public String toString() {
         StringBuilder builder = new StringBuilder();

@@ -158,4 +158,13 @@ public interface ConnectorService {
      * @return the response.
      */
     ImportQuestionResponse importQuestion(final LSurveyRequestCreator requestCreator);
+
+    /**
+     * Delete the question specified by the request being sent to the server.
+     * Returns true if and only if the question specified is removed, otherwise false.
+     *
+     * @param requestCreator the request creator.
+     * @return true if and only if the operation is succeed, otherwise false.
+     */
+    boolean deleteQuestion(final LSurveyRequestCreator requestCreator);
 }

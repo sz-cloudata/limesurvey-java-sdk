@@ -6,6 +6,7 @@
 package com.cloudata.survey.connector.utils;
 
 import com.cloudata.survey.connector.LSurveyConstants;
+import sun.misc.BASE64Encoder;
 
 import java.util.Iterator;
 import java.util.List;
@@ -98,5 +99,13 @@ public class StringUtils {
         builder.append("}");
 
         return builder.toString();
+    }
+
+    public static String base64Encode(final String src) {
+        if (src == null) {
+            return null;
+        }
+
+        return new BASE64Encoder().encode(src.getBytes());
     }
 }

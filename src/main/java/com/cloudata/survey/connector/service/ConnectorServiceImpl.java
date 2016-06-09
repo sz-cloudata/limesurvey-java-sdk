@@ -161,7 +161,17 @@ public class ConnectorServiceImpl implements ConnectorService {
     }
 
     public ImportQuestionResponse importQuestion(LSurveyRequestCreator requestCreator) {
-        return null;
+        return manager.execute(requestCreator, ImportQuestionResponse.class);
+    }
+
+    public boolean deleteQuestion(LSurveyRequestCreator requestCreator) {
+        ImportQuestionResponse response = manager.execute(requestCreator, ImportQuestionResponse.class);
+        QuestionInSession reqParams = (QuestionInSession) requestCreator.create().getReqParams();
+        if (response.getQuestionId() == reqParams.getQuestionId()) {
+            return true;
+        }
+
+        return false;
     }
 
     public void setManager(final LimeSurveyManager manager) {

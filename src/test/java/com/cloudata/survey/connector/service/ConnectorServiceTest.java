@@ -10,14 +10,20 @@ import com.cloudata.survey.connector.LSurveyConstants;
 import com.cloudata.survey.connector.creator.LSurveyRequestCreator;
 import com.cloudata.survey.connector.creator.SimpleHttpClientCreator;
 import com.cloudata.survey.connector.creator.SimpleHttpMethodCreator;
+import com.cloudata.survey.connector.importer.LSurveyAnswer;
+import com.cloudata.survey.connector.importer.LSurveyQuestion;
+import com.cloudata.survey.connector.importer.TemplateProducer;
 import com.cloudata.survey.connector.struct.*;
 import com.cloudata.survey.connector.utils.LimeSurveyManager;
+import com.cloudata.survey.connector.utils.StringUtils;
 import com.cloudata.survey.connector.view.*;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 import org.omg.CORBA.OBJ_ADAPTER;
+import sun.misc.BASE64Encoder;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -327,4 +333,87 @@ public class ConnectorServiceTest {
 
         Assert.assertTrue(result);
     }
+
+    @Test
+    public void testImportQuestion() {
+        final String SESSION_KEY = "6xnvyi3caxz7qyvyz95uqyswwk334kan";
+        final int SURVEY_ID = 846936;
+        final int GROUP_ID = 7;
+        final int QUESTION_ID = 77;
+        final String QUESTION_Title = "Q01";
+
+        ImportQuestionResponse response = service.importQuestion(new LSurveyRequestCreator() {
+            public LSurveyRequest create() {
+                String templatePath = "/templates";
+                String templateName = "question_lsq.ftl";
+
+                LSurveyQuestion question = new LSurveyQuestion();
+                question.setQuestionId(QUESTION_ID);
+                question.setQuestion("How old are you?");
+                question.setLanguage("en");
+                question.setType("L");
+                question.setQuestionTitle(QUESTION_Title);
+                question.setGroupId(GROUP_ID);
+                question.setSurveyId(SURVEY_ID);
+                question.setMandatory("N");
+
+                List<LSurveyAnswer> answers = new ArrayList<LSurveyAnswer>();
+                LSurveyAnswer answer = new LSurveyAnswer();
+                answer.setLanguage("en");
+                answer.setAnswer("12");
+                answer.setCode("A1");
+                answer.setQuestionId(QUESTION_ID);
+                answers.add(answer);
+
+                answer = new LSurveyAnswer();
+                answer.setLanguage("en");
+                answer.setAnswer("14");
+                answer.setCode("A2");
+                answer.setQuestionId(QUESTION_ID);
+                answers.add(answer);
+                answer.setDefault(true);
+                question.setAnswers(answers);
+
+                String importData = null;
+                try {
+                    importData = TemplateProducer.produce(templatePath, templateName, question);
+                } catch (IOException e) {
+                    importData = null;
+                }
+
+                System.out.println(importData);
+                System.out.println();
+                String encoded = StringUtils.base64Encode(importData);
+                ImportQuestionRequest reqParams = new ImportQuestionRequest();
+                reqParams.setSurveyGroupInSession(SESSION_KEY, SURVEY_ID, GROUP_ID);
+                reqParams.setImportData(encoded);
+                reqParams.setImportDataType(AllowedQuestionImportDataType.QUESTION_LSQ);
+                reqParams.setMandatory(false);
+
+
+                return new LSurveyRequest(LSurveyConstants.CMD_IMPORT_QUESTION, reqParams);
+            }
+        });
+
+        Assert.assertNotNull(response);
+        System.out.println(response);
+    }
+
+    @Test
+    public void testDeleteQuestion() {
+        final String SESSION_KEY = "6xnvyi3caxz7qyvyz95uqyswwk334kan";
+        final int QUESTION_ID = 78;
+
+        boolean result = service.deleteQuestion(new LSurveyRequestCreator() {
+            public LSurveyRequest create() {
+                QuestionInSession reqParams = new QuestionInSession(SESSION_KEY, QUESTION_ID);
+
+                return new LSurveyRequest(LSurveyConstants.CMD_DELETE_QUESTION, reqParams);
+            }
+        });
+
+        Assert.assertTrue(result);
+    }
+
+
 }
