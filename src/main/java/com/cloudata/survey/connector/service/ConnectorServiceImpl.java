@@ -174,6 +174,10 @@ public class ConnectorServiceImpl implements ConnectorService {
         return false;
     }
 
+    public ListQuestionsResponse listQuestions(final LSurveyRequestCreator requestCreator) {
+        return manager.execute(requestCreator, ListQuestionsResponse.class);
+    }
+
     public void setManager(final LimeSurveyManager manager) {
         this.manager = manager;
     }

@@ -167,4 +167,12 @@ public interface ConnectorService {
      * @return true if and only if the operation is succeed, otherwise false.
      */
     boolean deleteQuestion(final LSurveyRequestCreator requestCreator);
+
+    /**
+     * List all available questions according to the request being created by request creator.
+     *
+     * @param requestCreator the request creator.
+     * @return a List.
+     */
+    ListQuestionsResponse listQuestions(final LSurveyRequestCreator requestCreator);
 }

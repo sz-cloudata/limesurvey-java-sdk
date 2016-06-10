@@ -21,6 +21,7 @@ import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 import org.omg.CORBA.OBJ_ADAPTER;
+import org.omg.PortableServer.SERVANT_RETENTION_POLICY_ID;
 import sun.misc.BASE64Encoder;
 
 import java.io.IOException;
@@ -415,5 +416,21 @@ public class ConnectorServiceTest {
         Assert.assertTrue(result);
     }
 
+    @Test
+    public void testListQuestions() {
+        final String SESSION_KEY = "x64wuxhskgtx58qqnzn86m8isxet3xir";
+        final int SURVEY_ID = 846936;
+
+        ListQuestionsResponse response = service.listQuestions(new LSurveyRequestCreator() {
+            public LSurveyRequest create() {
+                SurveyInSession reqParams = new SurveyInSession(SESSION_KEY, SURVEY_ID);
+
+                return new LSurveyRequest(LSurveyConstants.CMD_LIST_QUESTIONS, reqParams);
+            }
+        });
+
+        Assert.assertNotNull(response);
+        System.out.println(response);
+    }
 
 }

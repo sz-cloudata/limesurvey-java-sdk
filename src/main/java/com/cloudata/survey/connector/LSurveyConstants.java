@@ -95,6 +95,8 @@ public interface LSurveyConstants {
 
     String CMD_DELETE_QUESTION = "delete_question";
 
+    String CMD_LIST_QUESTIONS = "list_questions";
+
     // ---------------------------------------------------------------
     // bulk names for Http header.
     // ---------------------------------------------------------------
@@ -301,4 +303,17 @@ public interface LSurveyConstants {
     String SERIALIZED_MANDATORY = "sMandatory";
     String SERIALIZED_QUESTION_ID = "iQuestionID";
 
+    String SERIALIZED_RESP_QUESTION_ID = "qid";
+    String SERIALIZED_QUESTION_PARENT_ID = "parent_qid";
+    String SERIALIZED_QUESTION_TYPE = "type";
+    String SERIALIZED_QUESTION_TITLE = "title";
+    String SERIALIZED_QUESTION_QUESTION = "question";
+    String SERIALIZED_QUESTION_PREG = "preg";
+    String SERIALIZED_HELP = "help";
+    String SERIALIZED_OTHER = "other";
+    String SERIALIZED_QUESTION_ORDER = "question_order";
+    String SERIALIZED_SCALE_ID = "scale_id";
+    String SERIALIZED_SAME_DEFAULT = "same_default";
+    String SERIALIZED_RELEVANCE = "relevance";
+    String SERIALIZED_MODULE_NAME = "modulename";
 }
