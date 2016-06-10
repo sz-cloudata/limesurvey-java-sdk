@@ -26,7 +26,7 @@ function read_parathesis() {
 	CONTENT=$(echo $1 | awk -F'{' '{print $2}' | awk -F'}' '{print $1}')
 	OLD_IFS=$IFS
 	IFS=","
-	CONTENT_ARR=$CONTENT
+	CONTENT_ARR=($CONTENT)
 	IFS="$OLD_IFS"
 
 	PARAMS="{"
@@ -54,7 +54,7 @@ function read_brackets() {
 	CONTENT=$(echo "$1" | awk -F'[' '{print $2}' | awk -F']' '{print $1}')
 	OLD_IFS=$IFS
 	IFS=","
-	CONTENT_ARR=$CONTENT
+	CONTENT_ARR=($CONTENT)
 	IFS="$OLD_IFS"
 
 	CONTENT_ARR_LEN=${#CONTENT_ARR[*]}
