@@ -97,6 +97,10 @@ public interface LSurveyConstants {
 
     String CMD_LIST_QUESTIONS = "list_questions";
 
+    String CMD_SET_QUESTION_PROPERTIES = "set_question_properties";
+
+    String CMD_GET_QUESTION_PROPERTIES = "get_question_properties";
+
     // ---------------------------------------------------------------
     // bulk names for Http header.
     // ---------------------------------------------------------------
@@ -316,4 +320,6 @@ public interface LSurveyConstants {
     String SERIALIZED_SAME_DEFAULT = "same_default";
     String SERIALIZED_RELEVANCE = "relevance";
     String SERIALIZED_MODULE_NAME = "modulename";
+    String SERIALIZED_QUESTION_DATA = "aQuestionData";
+    String SERIALIZED_QUESTION_SETTINGS = "aQuestionSettings";
 }

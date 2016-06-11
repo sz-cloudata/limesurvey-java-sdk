@@ -433,4 +433,46 @@ public class ConnectorServiceTest {
         System.out.println(response);
     }
 
+    @Test
+    public void testGetQuestionProperties() {
+        // pls correct me for testing.
+        final String SESSION_KEY = "sh6ebdig3derkgvajg4fa9f3av35sazr";
+        final int QUESTION_ID = 79;
+
+        Map<String, String> resposne = service.getQuestionProperties(new LSurveyRequestCreator() {
+            public LSurveyRequest create() {
+                GetQuestionPropertiesRequest reqParams = new GetQuestionPropertiesRequest(SESSION_KEY, QUESTION_ID, null);
+                List<String> properties = new ArrayList<String>();
+                properties.add("question");
+                reqParams.setProperties(properties);
+
+                return new LSurveyRequest(LSurveyConstants.CMD_GET_QUESTION_PROPERTIES, reqParams);
+            }
+        });
+
+        Assert.assertNotNull(resposne);
+        Assert.assertTrue(resposne.size() == 1);
+        System.out.println(resposne);
+    }
+
+    @Test
+    public void testSetQuestionProperties() {
+        // pls correct me for testing.
+        final String SESSION_KEY = "sh6ebdig3derkgvajg4fa9f3av35sazr";
+        final int QUESTION_ID = 79;
+
+        boolean response = service.setQuestionProperties(new LSurveyRequestCreator() {
+            public LSurveyRequest create() {
+                SetQuestionPropertiesRequest reqParams = new SetQuestionPropertiesRequest();
+                reqParams.setQuestionInSession(SESSION_KEY, QUESTION_ID);
+                Map<String, Object> questionData = new HashMap<String, Object>();
+                questionData.put("question", "How old are your son?");
+                reqParams.setQuestionData(questionData);
+
+                return new LSurveyRequest(LSurveyConstants.CMD_SET_QUESTION_PROPERTIES, reqParams);
+            }
+        });
+
+        Assert.assertTrue(response);
+    }
 }

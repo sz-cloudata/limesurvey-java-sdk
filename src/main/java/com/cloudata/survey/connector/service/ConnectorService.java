@@ -175,4 +175,22 @@ public interface ConnectorService {
      * @return a List.
      */
     ListQuestionsResponse listQuestions(final LSurveyRequestCreator requestCreator);
+
+    /**
+     * Set the question properties to the requested values according to the request being created by
+     * request creator. Returns true if and only if the operation is succeed, otherwise false.
+     *
+     * @param requestCreator the request creator.
+     * @return true if and only if the operation is succeed, otherwise false.
+     */
+    boolean setQuestionProperties(final LSurveyRequestCreator requestCreator);
+
+    /**
+     * Retrieves all requested values according to the request being created by request creator.
+     * Returns an empty map if no corresponding value being retrieved.
+     *
+     * @param requestCreator the request creator.
+     * @return a map of requested property and its associated value, or an empty map if no results found.
+     */
+    Map<String, String> getQuestionProperties(final LSurveyRequestCreator requestCreator);
 }

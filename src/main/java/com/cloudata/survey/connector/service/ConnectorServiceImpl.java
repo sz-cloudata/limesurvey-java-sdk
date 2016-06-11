@@ -11,7 +11,6 @@ import com.cloudata.survey.connector.creator.LSurveyRequestCreator;
 import com.cloudata.survey.connector.struct.*;
 import com.cloudata.survey.connector.utils.LimeSurveyManager;
 import com.cloudata.survey.connector.view.*;
-import com.google.gson.Gson;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
@@ -84,24 +83,7 @@ public class ConnectorServiceImpl implements ConnectorService {
         Map<String, Object> surveyData = reqParams.getSurveyData();
         final Set<String> keys = surveyData.keySet();
 
-        boolean succeed = manager.execute(requestCreator, new ProcessResultCallback<Boolean>() {
-            public Boolean doWithResult(Object result) {
-                JsonObject root = getRootElement((String) result);
-
-                for (String settingName : keys) {
-                    boolean settingValue = root.get(settingName).getAsBoolean();
-                    if (!settingValue) {
-                        // no need to iterate on
-                        // TODO log down this for problem solving
-                        return false;
-                    }
-                }
-
-                return true;
-            }
-        });
-
-        return succeed;
+        return manager.execute(requestCreator, new BooleanValueCheckerCallback(keys));
     }
 
     public GetAllSummariesResponse getAllSummaries(LSurveyRequestCreator requestCreator) {
@@ -140,24 +122,7 @@ public class ConnectorServiceImpl implements ConnectorService {
         Map<String, Object> groupSettings = reqParams.getProperties();
         final Set<String> keys = groupSettings.keySet();
 
-        final boolean succeed = manager.execute(requestCreator, new ProcessResultCallback<Boolean>() {
-            public Boolean doWithResult(Object result) {
-                JsonObject root = getRootElement(String.valueOf(result));
-
-                for (String settingName : keys) {
-                    boolean settingVal = root.get(settingName).getAsBoolean();
-                    if (!settingVal) {
-                        // no need to move on, just tell operator that it failed.
-                        // TODO log down which part failed for problem solving
-                        return false;
-                    }
-                }
-
-                return true;
-            }
-        });
-
-        return succeed;
+        return manager.execute(requestCreator, new BooleanValueCheckerCallback(keys));
     }
 
     public ImportQuestionResponse importQuestion(LSurveyRequestCreator requestCreator) {
@@ -178,6 +143,21 @@ public class ConnectorServiceImpl implements ConnectorService {
         return manager.execute(requestCreator, ListQuestionsResponse.class);
     }
 
+    public boolean setQuestionProperties(final LSurveyRequestCreator requestCreator) {
+        SetQuestionPropertiesRequest reqParams = (SetQuestionPropertiesRequest) requestCreator.create().getReqParams();
+        Map<String, Object> properties = reqParams.getQuestionData();
+        final Set<String> keys = properties.keySet();
+
+        return manager.execute(requestCreator, new BooleanValueCheckerCallback(keys));
+    }
+
+    public Map<String, String> getQuestionProperties(final LSurveyRequestCreator requestCreator) {
+        GetQuestionPropertiesRequest reqParams = (GetQuestionPropertiesRequest) requestCreator.create().getReqParams();
+        final List<String> properties = reqParams.getProperties();
+
+        return manager.execute(requestCreator, new ValuesReflectedCallback(properties));
+    }
+
     public void setManager(final LimeSurveyManager manager) {
         this.manager = manager;
     }
@@ -188,5 +168,46 @@ public class ConnectorServiceImpl implements ConnectorService {
         JsonElement rootElement = jsonObj.get(LSurveyConstants.SERIALIZED_RESULT);
 
         return rootElement.getAsJsonObject();
+    }
+
+    private static class BooleanValueCheckerCallback implements ProcessResultCallback<Boolean> {
+        private final Set<String> properties;
+
+        BooleanValueCheckerCallback(final Set<String> properties) {
+            this.properties = properties;
+        }
+
+        public Boolean doWithResult(final Object result) {
+            JsonObject root = getRootElement((String) result);
+
+            for (String property : properties) {
+                boolean isOk = root.get(property).getAsBoolean();
+                if (!isOk) {
+                    return false;
+                }
+            }
+
+            return true;
+        }
+    }
+
+    private static class ValuesReflectedCallback implements ProcessResultCallback<Map<String, String>> {
+        private final List<String> properties;
+
+        ValuesReflectedCallback(final List<String> properties) {
+            this.properties = properties;
+        }
+
+        public Map<String, String> doWithResult(Object result) {
+            Map<String, String> response = new HashMap<String, String>();
+            JsonObject root = getRootElement((String) result);
+
+            for (String property : properties) {
+                String value = root.get(property).getAsString();
+                response.put(property, value);
+            }
+
+            return response;
+        }
     }
 }
