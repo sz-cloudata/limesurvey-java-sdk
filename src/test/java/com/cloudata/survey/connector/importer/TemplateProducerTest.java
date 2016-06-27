@@ -23,7 +23,7 @@ public class TemplateProducerTest {
         String templatePath = "/templates";
         String templateName = "question_lsq.ftl";
 
-        LSurveyQuestion question = new LSurveyQuestion();
+        LSurveySingleChosenQuestion question = new LSurveySingleChosenQuestion();
         question.setQuestionId(1);
         question.setQuestion("How old are you?");
         question.setLanguage("en");

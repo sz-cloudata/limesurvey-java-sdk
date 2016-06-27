@@ -10,9 +10,7 @@ import com.cloudata.survey.connector.LSurveyConstants;
 import com.cloudata.survey.connector.creator.LSurveyRequestCreator;
 import com.cloudata.survey.connector.creator.SimpleHttpClientCreator;
 import com.cloudata.survey.connector.creator.SimpleHttpMethodCreator;
-import com.cloudata.survey.connector.importer.LSurveyAnswer;
-import com.cloudata.survey.connector.importer.LSurveyQuestion;
-import com.cloudata.survey.connector.importer.TemplateProducer;
+import com.cloudata.survey.connector.importer.*;
 import com.cloudata.survey.connector.struct.*;
 import com.cloudata.survey.connector.utils.LimeSurveyManager;
 import com.cloudata.survey.connector.utils.StringUtils;
@@ -25,10 +23,7 @@ import org.omg.PortableServer.SERVANT_RETENTION_POLICY_ID;
 import sun.misc.BASE64Encoder;
 
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 /**
  * A test for {@link ConnectorService}.
@@ -348,11 +343,10 @@ public class ConnectorServiceTest {
                 String templatePath = "/templates";
                 String templateName = "question_lsq.ftl";
 
-                LSurveyQuestion question = new LSurveyQuestion();
+                LSurveySingleChosenQuestion question = new LSurveySingleChosenQuestion();
                 question.setQuestionId(QUESTION_ID);
                 question.setQuestion("How old are you?");
                 question.setLanguage("en");
-                question.setType("L");
                 question.setQuestionTitle(QUESTION_Title);
                 question.setGroupId(GROUP_ID);
                 question.setSurveyId(SURVEY_ID);
@@ -388,6 +382,86 @@ public class ConnectorServiceTest {
                 ImportQuestionRequest reqParams = new ImportQuestionRequest();
                 reqParams.setSurveyGroupInSession(SESSION_KEY, SURVEY_ID, GROUP_ID);
                 reqParams.setImportData(encoded);
+                reqParams.setImportDataType(AllowedQuestionImportDataType.QUESTION_LSQ);
+                reqParams.setMandatory(false);
+
+
+                return new LSurveyRequest(LSurveyConstants.CMD_IMPORT_QUESTION, reqParams);
+            }
+        });
+
+        Assert.assertNotNull(response);
+        System.out.println(response);
+    }
+
+    @Test
+    public void testImportQuestionMultiple() {
+        final String SESSION_KEY = "uz6cnfs7ssazjnng5879bpdd6xe4qr8i";
+        final int SURVEY_ID = 846936;
+        final int GROUP_ID = 7;
+        final int QUESTION_ID = 77;
+        final String QUESTION_Title = "Q001";
+
+        ImportQuestionResponse response = service.importQuestion(new LSurveyRequestCreator() {
+            public LSurveyRequest create() {
+                String templatePath = "/templates";
+                String templateName = "question_with_multiple_answers_lsq.ftl";
+
+                LSurveyMultipleChosenQuestion question = new LSurveyMultipleChosenQuestion();
+                question.setMandatory("N");
+                question.setGroupId(GROUP_ID);
+                question.setQuestionTitle(QUESTION_Title);
+                question.setQuestion("Chinese province?");
+                question.setLanguage("en");
+                question.setParentQuestionId(0);
+                question.setSurveyId(SURVEY_ID);
+
+                List<LSurveyMultipleAnswers> answerses = new LinkedList<LSurveyMultipleAnswers>();
+                LSurveyMultipleAnswers answer = new LSurveyMultipleAnswers();
+                answer.setQuestion("GuangDong");
+                answer.setQuestionId(QUESTION_ID);
+                answer.setDefault(false);
+                answer.setTitle("SQ01");
+                answer.setQuestionOrder(1);
+
+                answerses.add(answer);
+                answer = new LSurveyMultipleAnswers();
+                answer.setQuestion("GuangXi");
+                answer.setQuestionId(QUESTION_ID);
+                answer.setDefault(false);
+                answer.setTitle("SQ02");
+                answer.setQuestionOrder(2);
+
+                answerses.add(answer);
+                answer = new LSurveyMultipleAnswers();
+                answer.setQuestion("HuNan");
+                answer.setQuestionId(QUESTION_ID);
+                answer.setDefault(false);
+                answer.setTitle("SQ03");
+                answer.setQuestionOrder(3);
+
+                answerses.add(answer);
+                answer = new LSurveyMultipleAnswers();
+                answer.setQuestion("Peking");
+                answer.setQuestionId(QUESTION_ID);
+                answer.setDefault(true);
+                answer.setTitle("SQ04");
+                answer.setQuestionOrder(4);
+
+                answerses.add(answer);
+                question.setSubquestions(answerses);
+
+                String importData = null;
+                try {
+                    importData = TemplateProducer.produce(templatePath, templateName, question);
+                } catch (IOException e) {
+                    importData = null;
+                }
+
+                importData = StringUtils.base64Encode(importData);
+                ImportQuestionRequest reqParams = new ImportQuestionRequest();
+                reqParams.setSurveyGroupInSession(SESSION_KEY, SURVEY_ID, GROUP_ID);
+                reqParams.setImportData(importData);
                 reqParams.setImportDataType(AllowedQuestionImportDataType.QUESTION_LSQ);
                 reqParams.setMandatory(false);
 
@@ -451,7 +525,7 @@ public class ConnectorServiceTest {
         });
 
         Assert.assertNotNull(resposne);
-        Assert.assertTrue(resposne.size() == 1);
+        Assert.assertTrue(resposne.size() == 1d);
         System.out.println(resposne);
     }
 

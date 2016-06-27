@@ -36,6 +36,10 @@ public class LSurveyQuestion implements Serializable {
 
     /**
      * The question type.
+     * <ul>
+     *     <li>L - single chosen question</li>
+     *     <li>M - multiple chosen question</li>
+     * </ul>
      */
     private String type;
 
@@ -60,9 +64,9 @@ public class LSurveyQuestion implements Serializable {
     private String language;
 
     /**
-     * The answers to this question.
+     * The question order.
      */
-    private List<LSurveyAnswer> answers;
+    private int questionOrder = 0;
 
     public int getQuestionId() {
         return questionId;
@@ -136,12 +140,12 @@ public class LSurveyQuestion implements Serializable {
         this.language = language;
     }
 
-    public List<LSurveyAnswer> getAnswers() {
-        return answers;
+    public int getQuestionOrder() {
+        return questionOrder;
     }
 
-    public void setAnswers(final List<LSurveyAnswer> answers) {
-        this.answers = answers;
+    public void setQuestionOrder(int questionOrder) {
+        this.questionOrder = questionOrder;
     }
 
     @Override
