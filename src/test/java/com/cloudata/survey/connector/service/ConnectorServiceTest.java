@@ -332,7 +332,7 @@ public class ConnectorServiceTest {
 
     @Test
     public void testImportQuestion() {
-        final String SESSION_KEY = "6xnvyi3caxz7qyvyz95uqyswwk334kan";
+        final String SESSION_KEY = "dwuy4f4pechb4py47hiznuuasyjf482f";
         final int SURVEY_ID = 846936;
         final int GROUP_ID = 7;
         final int QUESTION_ID = 77;
@@ -396,11 +396,11 @@ public class ConnectorServiceTest {
 
     @Test
     public void testImportQuestionMultiple() {
-        final String SESSION_KEY = "uz6cnfs7ssazjnng5879bpdd6xe4qr8i";
+        final String SESSION_KEY = "dwuy4f4pechb4py47hiznuuasyjf482f";
         final int SURVEY_ID = 846936;
         final int GROUP_ID = 7;
         final int QUESTION_ID = 77;
-        final String QUESTION_Title = "Q001";
+        final String QUESTION_Title = "Q00001";
 
         ImportQuestionResponse response = service.importQuestion(new LSurveyRequestCreator() {
             public LSurveyRequest create() {
@@ -409,6 +409,7 @@ public class ConnectorServiceTest {
 
                 LSurveyMultipleChosenQuestion question = new LSurveyMultipleChosenQuestion();
                 question.setMandatory("N");
+                question.setQuestionId(QUESTION_ID);
                 question.setGroupId(GROUP_ID);
                 question.setQuestionTitle(QUESTION_Title);
                 question.setQuestion("Chinese province?");
@@ -419,7 +420,7 @@ public class ConnectorServiceTest {
                 List<LSurveyMultipleAnswers> answerses = new LinkedList<LSurveyMultipleAnswers>();
                 LSurveyMultipleAnswers answer = new LSurveyMultipleAnswers();
                 answer.setQuestion("GuangDong");
-                answer.setQuestionId(QUESTION_ID);
+                answer.setQuestionId(QUESTION_ID + 1);
                 answer.setDefault(false);
                 answer.setTitle("SQ01");
                 answer.setQuestionOrder(1);
@@ -427,7 +428,7 @@ public class ConnectorServiceTest {
                 answerses.add(answer);
                 answer = new LSurveyMultipleAnswers();
                 answer.setQuestion("GuangXi");
-                answer.setQuestionId(QUESTION_ID);
+                answer.setQuestionId(QUESTION_ID + 2);
                 answer.setDefault(false);
                 answer.setTitle("SQ02");
                 answer.setQuestionOrder(2);
@@ -435,7 +436,7 @@ public class ConnectorServiceTest {
                 answerses.add(answer);
                 answer = new LSurveyMultipleAnswers();
                 answer.setQuestion("HuNan");
-                answer.setQuestionId(QUESTION_ID);
+                answer.setQuestionId(QUESTION_ID + 3);
                 answer.setDefault(false);
                 answer.setTitle("SQ03");
                 answer.setQuestionOrder(3);
@@ -443,7 +444,7 @@ public class ConnectorServiceTest {
                 answerses.add(answer);
                 answer = new LSurveyMultipleAnswers();
                 answer.setQuestion("Peking");
-                answer.setQuestionId(QUESTION_ID);
+                answer.setQuestionId(QUESTION_ID + 4);
                 answer.setDefault(true);
                 answer.setTitle("SQ04");
                 answer.setQuestionOrder(4);
