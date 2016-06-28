@@ -87,8 +87,8 @@ public class LimeSurveyManager {
     }
 
     public <T> T execute(final LSurveyRequestCreator requestCreator, final ProcessResultCallback<T> callback) {
-        if (requestCreator == null) {
-            throw new IllegalArgumentException("request creator should not be null");
+        if (requestCreator == null || callback == null) {
+            throw new IllegalArgumentException("request creator | callback should not be null");
         }
 
         T resp = null;
@@ -101,9 +101,6 @@ public class LimeSurveyManager {
             if (HttpStatus.SC_OK == response.getStatusLine().getStatusCode()) {
                 HttpEntity httpEntity = response.getEntity();
                 String json = EntityUtils.toString(httpEntity);
-                if (null == callback) {
-                    return (T) json;
-                }
 
                 resp = callback.doWithResult(json);
             }
